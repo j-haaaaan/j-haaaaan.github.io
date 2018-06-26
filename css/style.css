@@ -10,7 +10,8 @@
   background-size: cover;
   -o-background-size: cover;
 }
-.serif {
+.serif,
+.intro-header .post-heading .meta {
   font-family: 'Noto Sans Korean', 'Lora', 'Times New Roman', serif;
 }
 .sans-serif,
@@ -25,7 +26,6 @@ h6,
 .intro-header .site-heading .subheading,
 .intro-header .page-heading .subheading,
 .intro-header .post-heading .subheading,
-.intro-header .post-heading .meta,
 .btn,
 .pager li > a,
 .pager li > span {
