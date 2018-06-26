@@ -10,8 +10,7 @@
   background-size: cover;
   -o-background-size: cover;
 }
-.serif,
-.intro-header .post-heading .meta {
+.serif {
   font-family: 'Noto Sans Korean', 'Lora', 'Times New Roman', serif;
 }
 .sans-serif,
@@ -26,6 +25,7 @@ h6,
 .intro-header .site-heading .subheading,
 .intro-header .page-heading .subheading,
 .intro-header .post-heading .subheading,
+.intro-header .post-heading .meta,
 .btn,
 .pager li > a,
 .pager li > span {
@@ -512,7 +512,7 @@ figure.highlight {
 }
 figure.highlight figcaption {
   color: #999;
-  font-family: Monaco, Menlo, Consolas, Courier New, monospace;
+  font-family: Monaco, Menlo, Consolas, Courier New, monospace, sans-serif;
   margin-bottom: 5px;
   text-shadow: 0 0 1px #fff;
 }
