@@ -12,7 +12,7 @@
 }
 .serif,
 .intro-header .post-heading .meta {
-  font-family: 'Noto Sans Korean', 'Lora', 'Times New Roman', serif;
+  font-family: 'Montserrat', 'Oswald', 'Noto Sans Korean', 'Lora', 'Times New Roman', serif;
 }
 .sans-serif,
 body,
@@ -29,7 +29,7 @@ h6,
 .btn,
 .pager li > a,
 .pager li > span {
-  font-family: 'Noto Sans Korean', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'jejugothic', 'Noto Sans Korean', 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 body {
   font-size: 18px;
@@ -469,7 +469,7 @@ article .container .row .video-container embed {
 }
 article .container .row blockquote {
   font-style: italic;
-  font-family: "Georgia", serif;
+  font-family: jejugothic, Montserrat, Oswald, serif;
   font-size: 1.2em;
   padding: 0 30px 15px;
   text-align: center;
@@ -512,7 +512,7 @@ figure.highlight {
 }
 figure.highlight figcaption {
   color: #999;
-  font-family: Monaco, Menlo, Consolas, Courier New, monospace, sans-serif;
+  font-family: Consolas, jejugothic, Montserrat, Oswald, monospace;
   margin-bottom: 5px;
   text-shadow: 0 0 1px #fff;
 }
