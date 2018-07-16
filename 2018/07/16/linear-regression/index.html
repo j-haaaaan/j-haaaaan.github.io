@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Description-->
+
+    
+
+    
+        <meta name="description" content="for my own blog"/>
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="j-haaaaan"/>
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="Python 선형 회귀분석 기초"/>
+    
+
+    <!--Open Graph Description-->
+    
+        <meta property="og:description" content="for my own blog"/>
+    
+
+    <!--Open Graph Site Name-->
+        <meta property="og:site_name" content="살기 위해 산다"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article"/>
+    
+
+    <!--Page Cover-->
+    
+    
+        <meta property="og:image" content="https://github.com/j-haaaaan.github.iohttps://j-haaaaan.github.io/img/default-bg.jpg"/>
+    
+
+        <meta name="twitter:card" content="summary_large_image"/>
+
+    
+
+    
+        <meta name="twitter:image" content="https://github.com/j-haaaaan.github.iohttps://j-haaaaan.github.io/img/default-bg.jpg"/>
+    
+
+    <!-- Title -->
+    
+    <title>Python 선형 회귀분석 기초 - 살기 위해 산다</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/jejugothic.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Oswald">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-121447346-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+
+
+    <!-- favicon -->
+    
+    <link rel="icon" href="https://j-haaaaan.github.io/img/favicon.ico"/><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+
+<body>
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">j-haaaaan</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/j-haaaaan">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('https://j-haaaaan.github.io/img/ds-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Python 선형 회귀분석 기초</h1>
+                    
+                    <h2 class="post-subheading">
+                        stats model을 이용한 회귀분석 개념 익히기
+                    </h2>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2018-07-16
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/data-anaysis/">#data anaysis</a> <a href="/tags/data/">#data</a> <a href="/tags/linear-regression/">#linear regression</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/data-science/">data science</a>/ <a href="/categories/data-science/regression/">regression</a>
+
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h2 id="선형-회귀분석이란"><a href="#선형-회귀분석이란" class="headerlink" title="선형 회귀분석이란"></a>선형 회귀분석이란</h2><p>회귀분석(regression analysis)은, <br>독립 변수 <script type="math/tex">X</script>와 종속(출력) 변수 <script type="math/tex">y</script>간의 관계를 <strong>정량적으로</strong> 찾아내는 작업이다.<br>결정론적 모형은 단순히 독립 변수 <script type="math/tex">X</script>에 대해 대응하는 종속변수 <script type="math/tex">y</script>와 가장 비슷한 값 <strong><script type="math/tex">\hat{y}</script>를 출력하는 함수  <script type="math/tex">f(x)</script>를 찾는</strong> 과정이다.</p>
+<script type="math/tex; mode=display">\hat{y} = f \left( x \right) \approx y</script><p>가장 기초적인 선형 회귀분석의 형태는 다음과 같다.</p>
+<script type="math/tex; mode=display">\hat{y} = w_0 + w_1 x_1 + w_2 x_2 + \cdots + w_D x_D = w_0 + w^Tx</script><hr>
+<h2 id="OLS"><a href="#OLS" class="headerlink" title="OLS"></a>OLS</h2><p>OLS(Ordinary Least Squares)는 가장 기본적인 결정론적 선형 회귀 방법으로 <strong>잔차제곱합(RSS: Residual Sum of Squares)를 최소화</strong> 하는 가중치 벡터를 행렬 미분으로 구하는 방법이다.</p>
+<p>잔차 <script type="math/tex">e</script>는 다음과 같다.</p>
+<script type="math/tex; mode=display">e = {y} - \hat{y} = y - Xw</script><p>실제 <script type="math/tex">y</script>에서 예측한 <script type="math/tex">\hat{y}</script>을 뺀 값이다.</p>
+<hr>
+<h2 id="NumPy를-이용한-선형회귀분석"><a href="#NumPy를-이용한-선형회귀분석" class="headerlink" title="NumPy를 이용한 선형회귀분석"></a>NumPy를 이용한 선형회귀분석</h2><p>우선 <code>make_regression</code> 명령을 사용하여 다음과 같이 1차원 특징 데이터 <script type="math/tex">x</script>와 이 값에 의존하는 <script type="math/tex">y</script>를 만든다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_regression</span><br><span class="line"></span><br><span class="line">bias = <span class="number">100</span></span><br><span class="line">X0, y, coef = make_regression(n_samples=<span class="number">50</span>, n_features=<span class="number">1</span>, bias=bias, noise=<span class="number">5</span>, coef=<span class="keyword">True</span>, random_state=<span class="number">7</span>)</span><br><span class="line">X = sm.add_constant(X0)</span><br><span class="line">y = y.reshape(len(y), <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>상관계수(coef)를 구해보면 다음과 같이 나온다.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">coef</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array(52.43455968)</span><br></pre></td></tr></table></figure>
+<p>즉 이 경우 <script type="math/tex">x</script>와 <script type="math/tex">y</script>는 다음과 같은 관계를 가진다.</p>
+<script type="math/tex; mode=display">y = 50 + 52.43455968 x + \epsilon</script><p>최적가중치 <script type="math/tex">w^{\ast}</script>를 다음의 식을 이용해서 구해보면,</p>
+<script type="math/tex; mode=display">w^{\ast} = (X^TX)^{-1} X^T y</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">w = np.dot(np.dot(np.linalg.inv(np.dot(X.T, X)), X.T), y)</span><br><span class="line">w</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">array([[49.57840305],</span><br><span class="line">       [53.43695086]])</span><br></pre></td></tr></table></figure>
+<p>bias = 49.58, w = 53.43으로 실제와 비슷하게 나온 걸 확인할 수 있다.</p>
+<p>플로팅하면 다음과 같이 나온다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">x_new = np.linspace(np.min(X0), np.max(X0), <span class="number">100</span>)</span><br><span class="line">X_new = sm.add_constant(x_new)</span><br><span class="line">y_new = np.dot(X_new, w)</span><br><span class="line"></span><br><span class="line">plt.scatter(X0, y, label=<span class="string">"data"</span>)</span><br><span class="line">plt.plot(x_new, y_new, <span class="string">'r-'</span>, label=<span class="string">"LR"</span>)</span><br><span class="line">plt.xlabel(<span class="string">"x"</span>)</span><br><span class="line">plt.ylabel(<span class="string">"y"</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<center>
+<img width="395" alt="2018-07-16 20 09 35" src="https://user-images.githubusercontent.com/32727529/42755704-414e7e9a-8934-11e8-9d9c-fe4a75f99962.png"></center>
+
+<hr>
+<h2 id="Scikit-Learn-패키지를-사용한-선형회귀분석"><a href="#Scikit-Learn-패키지를-사용한-선형회귀분석" class="headerlink" title="Scikit-Learn 패키지를 사용한 선형회귀분석"></a>Scikit-Learn 패키지를 사용한 선형회귀분석</h2><p>Scikit-Learn 패키지를 사용하여 선형회귀분석을 하는 경우에는 <code>linear_model</code> 서브 패키지의 <code>LinearRegression</code> 클래스를 사용한다. 상수항이 있어도 오그멘테이션은 하지 않아도 된다(없을 경우 <code>fit_intercept=false</code>).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line"></span><br><span class="line">X0, y, coef = make_regression(n_samples=<span class="number">50</span>, n_features=<span class="number">1</span>, bias=bias, noise=<span class="number">5</span>, coef=<span class="keyword">True</span>, random_state=<span class="number">7</span>)</span><br><span class="line"></span><br><span class="line">model = LinearRegression(fit_intercept=<span class="keyword">True</span>)</span><br><span class="line">model = model.fit(X0, y)</span><br><span class="line">y_LRsci = model.predict(X0)</span><br><span class="line"></span><br><span class="line">plt.scatter(X0, y, label=<span class="string">"data"</span>)</span><br><span class="line">plt.plot(X0, y_LRsci, <span class="string">'r-'</span>, label=<span class="string">"Sklearn LR"</span>)</span><br><span class="line">plt.xlabel(<span class="string">"x"</span>)</span><br><span class="line">plt.ylabel(<span class="string">"y"</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<center>
+<img width="394" alt="2018-07-16 20 43 55" src="https://user-images.githubusercontent.com/32727529/42756906-05354826-8939-11e8-8495-bb28494b249b.png"></center>
+
+<hr>
+<h2 id="StatsModels-를-사용한-선형회귀분석"><a href="#StatsModels-를-사용한-선형회귀분석" class="headerlink" title="StatsModels 를 사용한 선형회귀분석"></a>StatsModels 를 사용한 선형회귀분석</h2><p>statsmodels 패키지에서는 OLS 클래스를 사용한다.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> statsmodels.api <span class="keyword">as</span> sm</span><br><span class="line"></span><br><span class="line">X0, y, coef = make_regression(n_samples=<span class="number">50</span>, n_features=<span class="number">1</span>, bias=bias, noise=<span class="number">5</span>, coef=<span class="keyword">True</span>, random_state=<span class="number">7</span>)</span><br><span class="line"></span><br><span class="line">x_new = sm.add_constant(X0) <span class="comment">#오그멘테이션 필요</span></span><br><span class="line"></span><br><span class="line">model = sm.OLS(y, x_new)</span><br><span class="line">result = model.fit()</span><br><span class="line">print(result.summary())</span><br></pre></td></tr></table></figure>
+<p>OLS는 다음과 같이 <code>summary</code>라는 메서드를 이용하여 리포트를 출력할 수 있다.</p>
+<center><img width="783" alt="2018-07-16 20 53 59" src="https://user-images.githubusercontent.com/32727529/42757303-790ca612-893a-11e8-99ab-3a0c79cbf225.png"></center>
+
+<p>const(상수항)과 <script type="math/tex">x_1</script>의 coef는 동일하게 출력되는 것을 볼 수 있다.</p>
+<hr>
+<p>리포트에 나오는 각 의미들은 다음 포스팅에 계속..</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/j-haaaaan" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="mailto:tucson482@gmail.com" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2018 j-haaaaan<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+
+</html>
