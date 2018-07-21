@@ -6,7 +6,7 @@
   <link href="/rss.xml" rel="self"/>
   
   <link href="https://github.com/j-haaaaan.github.io/"/>
-  <updated>2018-07-16T12:01:16.853Z</updated>
+  <updated>2018-07-20T09:17:51.980Z</updated>
   <id>https://github.com/j-haaaaan.github.io/</id>
   
   <author>
@@ -15,6 +15,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Toyota Corolla Price Prediction</title>
+    <link href="https://github.com/j-haaaaan.github.io/2018/07/20/proj-reg-toyota-01/"/>
+    <id>https://github.com/j-haaaaan.github.io/2018/07/20/proj-reg-toyota-01/</id>
+    <published>2018-07-20T08:23:49.010Z</published>
+    <updated>2018-07-20T09:17:51.980Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="서론"><a href="#서론" class="headerlink" title="서론"></a>서론</h2><p>이 프로젝트는 2017년 내가 데이터 사이언스 스쿨의 수강 당시 진행했던 회귀분석 프로젝트다.<br>기한이 조금 지나고 계속 신경은 안써서, 기억을 더듬어 볼 겸, 회귀분석 프로세스에 대해서도 재정립할 겸 포스팅해보려고 한다<font color="#C6C6C6"><del>(얼마나 거지같이 진행했었는지 성찰도..)</del></font>.</p><hr><h2 id="프로젝트-문제-정의"><a href="#프로젝트-문제-정의" class="headerlink" title="프로젝트 문제 정의"></a>프로젝트 문제 정의</h2><ul><li><p><strong>프로젝트의 목적</strong><br>본 프로젝트는 제시된 <strong>Toyota사 Corolla차량의 중고차 가격 train 데이터를 바탕으로, 회귀분석을 통해 새로이 제시되는 중고차 가격(test 데이터)을 예측</strong> 해 보는 것이다.</p></li><li><p><strong>데이터 크기</strong></p><ul><li>training data : 1019 rows, 39 columns</li><li>test data : 417 rows, 38 columns</li></ul></li><li><p><strong>프로젝트 평가</strong><br>실제 가격과 예측한 가격의 차이를 <font color="blue"><strong>Root-Mean-Squared-Error(RMSE)</strong></font> 를 통하여 채점한다.<br>평균 제곱근 편차(Root Mean Square Deviation; RMSD) 또는 평균 제곱근 오차(Root Mean Square Error; RMSE)는 <strong>추정 값 또는 모델이 예측한 값과 실제 환경에서 관찰되는 값의 차이를 다룰 때 흔히 사용하는 측도이다.</strong> 정밀도(precision)를 표현하는데 적합하다. 각각의 차이값은 잔차(residual)라고도 하며, 평균 제곱근 편차는 잔차들을 하나의 측도로 종합할 때 사용된다.<br><font color="#C6C6C6">(from WIKIPEDIA)</font></p></li></ul><script type="math/tex; mode=display">{\displaystyle \operatorname {RMSD} ({\hat {\theta }})={\sqrt {\operatorname {MSE} ({\hat {\theta }})}}={\sqrt {\operatorname {E} (({\hat {\theta }}-\theta )^{2})}}}</script><h2 id="독립-변수-정리"><a href="#독립-변수-정리" class="headerlink" title="독립 변수 정리"></a>독립 변수 정리</h2><ul><li><strong>Id </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Model </strong> <font color="gray">(class ‘str’&gt;</font></li><li><strong>Price </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Age_08_04 </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Mfg_Month </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Mfg_Year </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>KM </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Fuel_Type </strong> <font color="gray">(class ‘str’)</font></li><li><strong>HP </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Met_Color </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Color </strong> <font color="gray">(class ‘str’)</font></li><li><strong>Automatic </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>CC </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Doors </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Cylinders </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Gears </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Quarterly_Tax </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Weight </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Mfr_Guarantee </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>BOVAG_Guarantee </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Guarantee_Period </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>ABS </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Airbag_1 </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Airbag_2 </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Airco </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Automatic_airco </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Boardcomputer </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>CD_Player </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Central_Lock </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Powered_Windows </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Power_Steering </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Radio </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Mistlamps </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Sport_Model </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Backseat_Divider </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Metallic_Rim </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Radio_cassette </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Parking_Assistant </strong> <font color="gray">(class ‘numpy.int64’)</font></li><li><strong>Tow_Bar </strong> <font color="gray">(class ‘numpy.int64’)</font></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;서론&quot;&gt;&lt;a href=&quot;#서론&quot; class=&quot;headerlink&quot; title=&quot;서론&quot;&gt;&lt;/a&gt;서론&lt;/h2&gt;&lt;p&gt;이 프로젝트는 2017년 내가 데이터 사이언스 스쿨의 수강 당시 진행했던 회귀분석 프로젝트다.&lt;br&gt;기한이 조금 지나고 계속
+        
+      
+    
+    </summary>
+    
+      <category term="data science" scheme="https://github.com/j-haaaaan.github.io/categories/data-science/"/>
+    
+      <category term="regression" scheme="https://github.com/j-haaaaan.github.io/categories/data-science/regression/"/>
+    
+    
+      <category term="data anaysis" scheme="https://github.com/j-haaaaan.github.io/tags/data-anaysis/"/>
+    
+      <category term="data" scheme="https://github.com/j-haaaaan.github.io/tags/data/"/>
+    
+      <category term="regression" scheme="https://github.com/j-haaaaan.github.io/tags/regression/"/>
+    
+      <category term="python" scheme="https://github.com/j-haaaaan.github.io/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>Python 선형 회귀분석 기초</title>
